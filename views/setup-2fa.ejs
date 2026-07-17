@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+<div class="card auth-card">
+  <h1>Two-factor authentication</h1>
+
+  <% if (enabled) { %>
+    <div class="flash flash-success">2FA is already enabled on your account.</div>
+    <a class="btn btn-primary btn-block" href="/dashboard">Back to dashboard</a>
+  <% } else { %>
+    <p class="muted">Scan this QR code with Google Authenticator, Authy, or any TOTP app, then enter the 6-digit code to confirm.</p>
+
+    <div class="qr">
+      <img src="<%= qr %>" alt="Two-factor authentication QR code" />
+    </div>
+
+    <details>
+      <summary>Can't scan? Enter this key manually</summary>
+      <code><%= secret %></code>
+    </details>
+
+    <% if (errors.length) { %>
+      <div class="flash flash-error"><%= errors[0].msg %></div>
+    <% } %>
+
+    <form action="/2fa/setup" method="POST">
+      <label>6-digit code
+        <input type="text" name="token" inputmode="numeric" pattern="[0-9 ]*" autocomplete="one-time-code" required autofocus />
+      </label>
+      <button type="submit" class="btn btn-primary btn-block">Verify &amp; enable</button>
+    </form>
+  <% } %>
+</div>
+<%- include('partials/footer') %>

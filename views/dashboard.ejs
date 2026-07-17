@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+<div class="card">
+  <h1>Welcome, <%= user.username %> 👋</h1>
+  <p class="muted">You are securely logged in. This page is protected by session authentication — signed-out visitors are redirected to the login page.</p>
+
+  <div class="info-grid">
+    <div>
+      <span class="label">Username</span>
+      <span><%= user.username %></span>
+    </div>
+    <div>
+      <span class="label">Email</span>
+      <span><%= user.email %></span>
+    </div>
+    <div>
+      <span class="label">Member since</span>
+      <span><%= user.created_at %></span>
+    </div>
+    <div>
+      <span class="label">Two-factor auth</span>
+      <span class="badge <%= user.is_2fa_enabled ? 'badge-on' : 'badge-off' %>">
+        <%= user.is_2fa_enabled ? 'Enabled' : 'Disabled' %>
+      </span>
+    </div>
+  </div>
+
+  <div class="actions">
+    <% if (user.is_2fa_enabled) { %>
+      <form action="/2fa/disable" method="POST">
+        <button type="submit" class="btn btn-ghost">Disable 2FA</button>
+      </form>
+    <% } else { %>
+      <a class="btn btn-primary" href="/2fa/setup">Enable two-factor auth</a>
+    <% } %>
+    <form action="/logout" method="POST">
+      <button type="submit" class="btn btn-danger">Log out</button>
+    </form>
+  </div>
+</div>
+<%- include('partials/footer') %>

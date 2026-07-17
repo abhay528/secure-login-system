@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+<div class="card auth-card">
+  <h1>Welcome back</h1>
+  <p class="muted">Log in to your account.</p>
+
+  <% if (errors.length) { %>
+    <div class="flash flash-error">
+      <ul>
+        <% errors.forEach(function (e) { %><li><%= e.msg %></li><% }); %>
+      </ul>
+    </div>
+  <% } %>
+
+  <form action="/login" method="POST" novalidate>
+    <label>Username
+      <input type="text" name="username" value="<%= values.username || '' %>" required autofocus />
+    </label>
+    <label>Password
+      <input type="password" name="password" required />
+    </label>
+    <button type="submit" class="btn btn-primary btn-block">Log in</button>
+  </form>
+
+  <p class="muted center" style="margin-top:20px">
+    New here? <a href="/register">Create an account</a>
+  </p>
+</div>
+<%- include('partials/footer') %>

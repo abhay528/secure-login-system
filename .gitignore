@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Local database & sessions (created at runtime)
+data/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Environment secrets
+.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/

@@ -1,0 +1,17 @@
+<%- include('partials/header') %>
+<div class="card auth-card">
+  <h1>Two-factor authentication</h1>
+  <p class="muted">Open your authenticator app and enter the current 6-digit code.</p>
+
+  <% if (errors.length) { %>
+    <div class="flash flash-error"><%= errors[0].msg %></div>
+  <% } %>
+
+  <form action="/login/2fa" method="POST">
+    <label>6-digit code
+      <input type="text" name="token" inputmode="numeric" pattern="[0-9 ]*" autocomplete="one-time-code" required autofocus />
+    </label>
+    <button type="submit" class="btn btn-primary btn-block">Verify</button>
+  </form>
+</div>
+<%- include('partials/footer') %>
