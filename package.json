@@ -18,7 +18,7 @@
     "sqlite",
     "nodejs"
   ],
-  "author": "Jual Coco",
+  "author": "Abhay Jadon",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.1.1",
